@@ -1,0 +1,7 @@
+@WebServlet("/test")
+public class TestServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+        throws IOException {
+        res.getWriter().println("Server is working");
+    }
+}

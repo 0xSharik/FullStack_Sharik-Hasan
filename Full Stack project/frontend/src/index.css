@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0');
+
+/* ═══════════════════════════════════════════════
+   Midnight Indigo Vault — Design System Tokens
+   Generated via Stitch MCP / The Nocturnal Curator
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* Surface hierarchy */
+  --surface:                 #0b1326;
+  --surface-dim:             #0b1326;
+  --surface-bright:          #31394d;
+  --surface-container-lowest: #060e20;
+  --surface-container-low:   #131b2e;
+  --surface-container:       #171f33;
+  --surface-container-high:  #222a3d;
+  --surface-container-highest: #2d3449;
+  --surface-variant:         #2d3449;
+
+  /* Primary palette */
+  --primary:                 #c0c1ff;
+  --primary-container:       #8083ff;
+  --primary-fixed:           #e1e0ff;
+  --on-primary:              #1000a9;
+  --on-primary-container:    #0d0096;
+
+  /* Secondary palette */
+  --secondary:               #d0bcff;
+  --secondary-container:     #571bc1;
+  --on-secondary:            #3c0091;
+  --on-secondary-container:  #c4abff;
+
+  /* Tertiary palette */
+  --tertiary:                #fbabff;
+  --tertiary-container:      #e14ef6;
+
+  /* Text tokens */
+  --on-surface:              #dae2fd;
+  --on-surface-variant:      #c7c4d7;
+  --on-background:           #dae2fd;
+
+  /* Outline & borders */
+  --outline:                 #908fa0;
+  --outline-variant:         #464554;
+
+  /* Functional */
+  --error:                   #ffb4ab;
+  --error-container:         #93000a;
+  --surface-tint:            #c0c1ff;
+  --inverse-surface:         #dae2fd;
+  --inverse-on-surface:      #283044;
+  --inverse-primary:         #494bd6;
+
+  /* Gradient tokens */
+  --gradient-primary:        linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+  --gradient-accent:         linear-gradient(135deg, #8083ff, #c0c1ff);
+  --gradient-cta:            linear-gradient(135deg, #6366f1, #8b5cf6);
+  --gradient-text:           linear-gradient(135deg, #c0c1ff, #8083ff, #d0bcff);
+
+  /* Shadows — tinted, never black */
+  --shadow-sm:               0 2px 8px rgba(99, 102, 241, 0.06);
+  --shadow-md:               0 8px 24px rgba(99, 102, 241, 0.08);
+  --shadow-lg:               0 16px 48px rgba(99, 102, 241, 0.12);
+  --shadow-glow:             0 0 30px rgba(128, 131, 255, 0.15);
+  --shadow-glow-strong:      0 0 50px rgba(128, 131, 255, 0.25);
+
+  /* Radii */
+  --radius-sm:  0.75rem;
+  --radius-md:  1rem;
+  --radius-lg:  1.5rem;
+  --radius-xl:  2rem;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Transitions */
+  --transition-fast:  150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base:  250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:  400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ═══════════════════════════════════════════════
+   Reset & Base
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--surface);
+  color: var(--on-surface);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Ambient background glow orbs */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(120px);
+  opacity: 0.4;
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+  top: -200px;
+  right: -100px;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
+  bottom: -150px;
+  left: -100px;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Material Symbols */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 1;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(128, 131, 255, 0.3);
+  color: var(--on-surface);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-container-low);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

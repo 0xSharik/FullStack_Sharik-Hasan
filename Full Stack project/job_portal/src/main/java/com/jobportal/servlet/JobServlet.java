@@ -1,0 +1,66 @@
+package com.jobportal.servlet;
+
+import com.jobportal.dao.JobDAO;
+import com.jobportal.model.Job;
+import com.google.gson.Gson;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.io.BufferedReader;
+
+@WebServlet("/jobs")
+public class JobServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    // ✅ GET: fetch all jobs
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("application/json");
+
+        List<Job> jobs = JobDAO.getAllJobs();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(jobs);
+
+        PrintWriter out = response.getWriter();
+        out.print(json);
+    }
+
+    // ✅ POST: add job (handles JSON properly)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setContentType("application/json");
+
+        // 🔥 Read JSON body from React
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        System.out.println("RAW DATA: " + sb.toString());
+        Gson gson = new Gson();
+        Job job = gson.fromJson(sb.toString(), Job.class);
+
+        boolean status = JobDAO.addJob(job);
+
+        PrintWriter out = response.getWriter();
+
+        if (status) {
+            out.print("{\"message\":\"Job added\"}");
+        } else {
+            out.print("{\"message\":\"Error\"}");
+        }
+    }
+}

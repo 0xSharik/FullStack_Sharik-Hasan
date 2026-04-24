@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;job portal&apos; to &apos;job_portal&apos;" description="Rename resource &apos;job portal&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/job portal" name="job_portal" stamp="1776790376908" updateReferences="true"/>
+</session>

@@ -1,0 +1,5 @@
+package com.jobportal.servlet;
+
+public class ApplicationServlet {
+
+}
