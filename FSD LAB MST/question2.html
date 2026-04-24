@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interaction</title>
+</head>
+
+<body>
+
+    <p id="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ab tenetur veniam architecto enim
+        quaerat doloribus necessitatibus dolorem, minima ipsam corrupti sit nesciunt iste ullam voluptatem consequuntur
+        sint nisi officia.</p>
+
+    <button id="btn">Click Me</button>
+
+    <script>
+        const para = document.getElementById('text');
+        const btn = document.getElementById('btn');
+
+        btn.addEventListener('click', () => {
+            para.textContent = 'Welcome to JS DOM manipulation';
+            para.style.color = 'blue';
+            para.style.fontSize = '24px';
+        });
+    </script>
+</body>
+
+</html>
