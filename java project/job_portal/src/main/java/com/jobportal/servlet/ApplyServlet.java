@@ -1,0 +1,47 @@
+package com.jobportal.servlet;
+
+import com.jobportal.dao.ApplicationDAO;
+import com.google.gson.Gson;
+
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet("/apply")
+public class ApplyServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setContentType("application/json");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int jobId = Integer.parseInt(request.getParameter("jobId"));
+
+        boolean status = ApplicationDAO.applyJob(userId, jobId);
+
+        System.out.println("Apply → user: " + userId + ", job: " + jobId);
+
+        response.getWriter().print(
+            status ? "{\"message\":\"Applied\"}" : "{\"message\":\"Already Applied or Error\"}"
+        );
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setContentType("application/json");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        List<String> jobs = ApplicationDAO.getAppliedJobs(userId);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(jobs);
+
+        response.getWriter().print(json);
+    }
+}

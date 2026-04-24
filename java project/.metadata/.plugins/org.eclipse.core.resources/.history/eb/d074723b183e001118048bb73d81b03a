@@ -1,0 +1,44 @@
+package com.jobportal.servlet;
+
+import javax.servlet.*;
+import com.google.gson.Gson;
+import java.util.List;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet("/apply")
+public class ApplyServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setContentType("application/json");
+
+        String userId = request.getParameter("userId");
+        String jobId = request.getParameter("jobId");
+
+        System.out.println("User " + userId + " applied for Job " + jobId);
+
+        PrintWriter out = response.getWriter();
+        out.print("{\"message\":\"Application Submitted\"}");
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setContentType("application/json");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
+        List<String> jobs = ApplicationDAO.getAppliedJobs(userId);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(jobs);
+
+        response.getWriter().print(json);
+    }
+}

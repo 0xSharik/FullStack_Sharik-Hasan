@@ -1,0 +1,5 @@
+package com.jobportal.filter;
+
+public class CORSFilter {
+
+}

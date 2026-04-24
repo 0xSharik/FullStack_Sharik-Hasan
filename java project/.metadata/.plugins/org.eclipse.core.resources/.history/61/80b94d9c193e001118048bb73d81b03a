@@ -1,0 +1,53 @@
+package com.jobportal.dao;
+
+import java.sql.*;
+import com.jobportal.util.DBConnection;
+
+public class ApplicationDAO {
+
+    public static boolean applyJob(int userId, int jobId) {
+        try {
+            Connection con = DBConnection.getConnection();
+
+            String query = "INSERT INTO applications(user_id, job_id, status) VALUES (?, ?, 'APPLIED')";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, userId);
+            ps.setInt(2, jobId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    public static List<String> getAppliedJobs(int userId) {
+        List<String> jobs = new ArrayList<>();
+
+        try {
+            Connection con = DBConnection.getConnection();
+
+            String query = "SELECT j.title, j.location " +
+                           "FROM applications a " +
+                           "JOIN jobs j ON a.job_id = j.job_id " +
+                           "WHERE a.user_id = ?";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String job = rs.getString("title") + " - " + rs.getString("location");
+                jobs.add(job);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return jobs;
+    }
+}

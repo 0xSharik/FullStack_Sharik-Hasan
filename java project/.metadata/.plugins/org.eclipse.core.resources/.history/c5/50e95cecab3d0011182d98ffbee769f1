@@ -1,0 +1,16 @@
+@WebServlet("/apply")
+public class ApplicationServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int jobId = Integer.parseInt(request.getParameter("jobId"));
+
+        boolean status = ApplicationDAO.applyJob(userId, jobId);
+
+        response.getWriter().print(status ? "Applied" : "Error");
+    }
+}
